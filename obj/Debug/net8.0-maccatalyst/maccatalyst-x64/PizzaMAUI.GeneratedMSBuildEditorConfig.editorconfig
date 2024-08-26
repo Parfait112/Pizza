@@ -1,0 +1,77 @@
+is_global = true
+build_property.EnableAotAnalyzer = 
+build_property.EnableSingleFileAnalyzer = 
+build_property.EnableTrimAnalyzer = false
+build_property.IncludeAllContentForSelfExtract = 
+build_property.TargetFramework = net8.0-maccatalyst
+build_property.TargetPlatformMinVersion = 
+build_property.UsingMicrosoftNETSdkWeb = 
+build_property.ProjectTypeGuids = 
+build_property.InvariantGlobalization = false
+build_property.PlatformNeutralAssembly = 
+build_property.EnforceExtendedAnalyzerRules = 
+build_property._SupportedPlatformList = Linux,macOS,Windows
+build_property.RootNamespace = PizzaMAUI
+build_property.ProjectDir = C:\Users\Mr parfait\source\repos\PizzaMAUI\PizzaMAUI\
+build_property.EnableComHosting = 
+build_property.EnableGeneratedComInterfaceComImportInterop = 
+
+[C:/Users/Mr parfait/source/repos/PizzaMAUI/PizzaMAUI/App.xaml]
+build_metadata.AdditionalFiles.GenKind = Xaml
+build_metadata.AdditionalFiles.ManifestResourceName = PizzaMAUI.App.xaml
+build_metadata.AdditionalFiles.TargetPath = App.xaml
+build_metadata.AdditionalFiles.RelativePath = App.xaml
+
+[C:/Users/Mr parfait/source/repos/PizzaMAUI/PizzaMAUI/AppShell.xaml]
+build_metadata.AdditionalFiles.GenKind = Xaml
+build_metadata.AdditionalFiles.ManifestResourceName = PizzaMAUI.AppShell.xaml
+build_metadata.AdditionalFiles.TargetPath = AppShell.xaml
+build_metadata.AdditionalFiles.RelativePath = AppShell.xaml
+
+[C:/Users/Mr parfait/source/repos/PizzaMAUI/PizzaMAUI/page/AllPizzaPage.xaml]
+build_metadata.AdditionalFiles.GenKind = Xaml
+build_metadata.AdditionalFiles.ManifestResourceName = PizzaMAUI.page.AllPizzaPage.xaml
+build_metadata.AdditionalFiles.TargetPath = page\AllPizzaPage.xaml
+build_metadata.AdditionalFiles.RelativePath = page\AllPizzaPage.xaml
+
+[C:/Users/Mr parfait/source/repos/PizzaMAUI/PizzaMAUI/page/CartPage.xaml]
+build_metadata.AdditionalFiles.GenKind = Xaml
+build_metadata.AdditionalFiles.ManifestResourceName = PizzaMAUI.page.CartPage.xaml
+build_metadata.AdditionalFiles.TargetPath = page\CartPage.xaml
+build_metadata.AdditionalFiles.RelativePath = page\CartPage.xaml
+
+[C:/Users/Mr parfait/source/repos/PizzaMAUI/PizzaMAUI/page/CheckoutPage.xaml]
+build_metadata.AdditionalFiles.GenKind = Xaml
+build_metadata.AdditionalFiles.ManifestResourceName = PizzaMAUI.page.CheckoutPage.xaml
+build_metadata.AdditionalFiles.TargetPath = page\CheckoutPage.xaml
+build_metadata.AdditionalFiles.RelativePath = page\CheckoutPage.xaml
+
+[C:/Users/Mr parfait/source/repos/PizzaMAUI/PizzaMAUI/page/DetailePage.xaml]
+build_metadata.AdditionalFiles.GenKind = Xaml
+build_metadata.AdditionalFiles.ManifestResourceName = PizzaMAUI.page.DetailePage.xaml
+build_metadata.AdditionalFiles.TargetPath = page\DetailePage.xaml
+build_metadata.AdditionalFiles.RelativePath = page\DetailePage.xaml
+
+[C:/Users/Mr parfait/source/repos/PizzaMAUI/PizzaMAUI/page/HomePage.xaml]
+build_metadata.AdditionalFiles.GenKind = Xaml
+build_metadata.AdditionalFiles.ManifestResourceName = PizzaMAUI.page.HomePage.xaml
+build_metadata.AdditionalFiles.TargetPath = page\HomePage.xaml
+build_metadata.AdditionalFiles.RelativePath = page\HomePage.xaml
+
+[C:/Users/Mr parfait/source/repos/PizzaMAUI/PizzaMAUI/page/MainPage.xaml]
+build_metadata.AdditionalFiles.GenKind = Xaml
+build_metadata.AdditionalFiles.ManifestResourceName = PizzaMAUI.page.MainPage.xaml
+build_metadata.AdditionalFiles.TargetPath = page\MainPage.xaml
+build_metadata.AdditionalFiles.RelativePath = page\MainPage.xaml
+
+[C:/Users/Mr parfait/source/repos/PizzaMAUI/PizzaMAUI/Resources/Styles/Colors.xaml]
+build_metadata.AdditionalFiles.GenKind = Xaml
+build_metadata.AdditionalFiles.ManifestResourceName = PizzaMAUI.Resources.Styles.Colors.xaml
+build_metadata.AdditionalFiles.TargetPath = Resources\Styles\Colors.xaml
+build_metadata.AdditionalFiles.RelativePath = Resources\Styles\Colors.xaml
+
+[C:/Users/Mr parfait/source/repos/PizzaMAUI/PizzaMAUI/Resources/Styles/Styles.xaml]
+build_metadata.AdditionalFiles.GenKind = Xaml
+build_metadata.AdditionalFiles.ManifestResourceName = PizzaMAUI.Resources.Styles.Styles.xaml
+build_metadata.AdditionalFiles.TargetPath = Resources\Styles\Styles.xaml
+build_metadata.AdditionalFiles.RelativePath = Resources\Styles\Styles.xaml

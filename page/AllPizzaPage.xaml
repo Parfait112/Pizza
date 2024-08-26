@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+             xmlns:model="clr-namespace:PizzaMAUI.model"
+             xmlns:vm="clr-namespace:PizzaMAUI.ViewModel"
+             x:Class="PizzaMAUI.page.AllPizzaPage"
+             Title="All Items"
+             x:DataType="vm:AllPizzaViewModel">
+
+
+    <!--nous avons la posibilite de change le titre de la page en fonction de la du chemin utiliser pour arriver a cette page-->
+    <ContentPage.Triggers>
+        <DataTrigger TargetType="ContentPage"  Binding="{Binding FromSearch}" Value="True">
+            <Setter Property="Title" Value="Search For pizza"/>
+        </DataTrigger>
+    </ContentPage.Triggers>
+
+    <!--nous avons diver cette element en plusieur range-->
+    <Grid RowDefinitions="Auto,*">
+        <!--nous avons la barre de rechercher avec ses specificite et son chemain-->
+        <SearchBar x:Name="searchBar" Grid.Row="0" Placeholder="Searche for pizza ..." PlaceholderColor="Goldenrod" CancelButtonColor="Red" TextColor="DarkGoldenrod" SearchCommand="{Binding SearchPizzasCommand}" SearchCommandParameter="{Binding Source={x:Reference searchBar}, Path=Text}" TextChanged="searchBar_TextChanged"/>
+        <ScrollView Grid.Row="1" Margin="5" >
+            <VerticalStackLayout>
+                <!--nous faisons une collection de donnee depuis la base de donnee-->
+                <CollectionView ItemsSource="{Binding Pizzas}">
+                    <!--nous avons la manier que tout ses element doit etre a ligner-->
+                    <CollectionView.ItemsLayout>
+                        <LinearItemsLayout Orientation="Vertical" ItemSpacing="10"/>
+                    </CollectionView.ItemsLayout>
+                    <!--nous avons les element aui seront collecte depuis la base de donnee-->
+                    <CollectionView.ItemTemplate>
+                        <!--nous avons le nom de la base de donnee-->
+                        <DataTemplate x:DataType="model:Pizza">
+                            <!--ici nous avons le code pour creer un rectangle avec les bordue round-->
+                            <Border StrokeShape="RoundRectangle 25" StrokeThickness="0" BackgroundColor="PaleGoldenrod" Padding="10" Margin="5">
+                                <!--nous avons diviser le contenue en plusier column-->
+                                <Grid ColumnDefinitions="130, *" ColumnSpacing="5">
+                                    <!--ici nous avons la 1er column qui est l'image qui se trouve dans labase de donnee-->
+                                    <Image Grid.Column="0" Source="{Binding Image}" HeightRequest="130" WidthRequest="130"/>
+                                    <!--ici nous avons diviser la 2em column-->
+                                    <VerticalStackLayout Grid.Column="1" VerticalOptions="Center" Spacing="5">
+                                        <!--ici nous avons le nom qui se trouve dans la base de donnee-->
+                                        <Label Text="{Binding Name}" FontSize="20"/>
+                                        <!--nous avons diviser le contenue en plusier column-->
+                                        <Grid ColumnDefinitions="*,*" >
+                                            <!--nous avons le prix qui se trouve dans la base de donnee dans un format  specific sur la 1er column-->
+                                            <Label Grid.Column="0" Text="{Binding Price, StringFormat='${0:N2}'}" FontAttributes="Bold"/>
+                                            <!--ici nous avons diviser la 2em column-->
+                                            <HorizontalStackLayout Grid.Column="1" HorizontalOptions="End" Spacing="2">
+                                                <!--ici nous avons un text-->
+                                                <Label Text="4"/>
+                                                <!--ici nous avons une image-->
+                                                <Image Source="star" HeightRequest="15">
+                                                    <!--ici nous avons la color de l'image-->
+                                                    <Image.Behaviors>
+                                                        <toolkit:IconTintColorBehavior TintColor="DarkGoldenrod"/>
+                                                    </Image.Behaviors>
+                                                </Image>
+                                            </HorizontalStackLayout>
+                                        </Grid>
+                                        <!--ici nous avons le code pour creer un rectangle avec les bordue round-->
+                                        <Border StrokeShape="RoundRectangle 25" StrokeThickness="0" BackgroundColor="Gold" HeightRequest="45" HorizontalOptions="Center" Padding="30, 5" VerticalOptions="End">
+                                            <!--ici nous avons diviser le contenue de se bordue-->
+                                            <VerticalStackLayout Spacing="2">
+                                                <!--ici nous avons un text-->
+                                                <Label Text="View more" HorizontalOptions="Start" VerticalOptions="Start"/>
+                                                <!--ici nous avons une image-->
+                                                <Image Source="right" HeightRequest="30" VerticalOptions="End"/>
+
+                                            </VerticalStackLayout>
+                                            <!--ici nous avons avont l'effect qui conduit a ses bordue-->
+                                            <Border.GestureRecognizers>
+                                                <TapGestureRecognizer Command="{Binding Source={x:RelativeSource AncestorType={x:Type vm:AllPizzaViewModel}}, Path=GoToDetailsPageCommand}" CommandParameter="{Binding .}" />
+                                            </Border.GestureRecognizers>
+                                        </Border>
+                                    </VerticalStackLayout>
+                                </Grid>
+                            </Border>
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                    <!--ici est une situation quand la il y'a pas de donnee-->
+                    <CollectionView.EmptyView>
+                        <!--nous divisons des elements-->
+                        <VerticalStackLayout HorizontalOptions="Center" VerticalOptions="Center">
+                            <!--ici nous avons un code pour boit qui va nous permetre de separer la barre de recherche et le text -->
+                            <BoxView HeightRequest="100" Color="Transparent"/>
+                            <!--ici nous avons un text-->
+                            <Label Text="No Pizza Found" TextColor="Grey" FontSize="25" HorizontalTextAlignment="Center" >
+                                <!--ici nous avons effect de du text en meme temp sa effectue une recherche-->
+                                <Label.Triggers>
+                                    <DataTrigger TargetType="Label" Binding="{Binding Searching}" Value="True">
+                                        <Setter Property="Text" Value="Searching..."/>
+                                    </DataTrigger>
+                                </Label.Triggers>
+                            </Label>
+                        </VerticalStackLayout>
+                    </CollectionView.EmptyView>
+                </CollectionView>
+            </VerticalStackLayout>
+        </ScrollView>
+        <!--un simple court instant avant que la recherche aboutir-->
+        <ActivityIndicator Grid.Row="2" IsRunning="{Binding Searching}" VerticalOptions="Center" HorizontalOptions="Center" Color="DarkGoldenrod"/>
+    </Grid>
+</ContentPage>

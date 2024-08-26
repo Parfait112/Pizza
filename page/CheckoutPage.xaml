@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+             xmlns:model="clr-namespace:PizzaMAUI.model"
+             xmlns:vm="clr-namespace:PizzaMAUI.ViewModel"
+             x:Class="PizzaMAUI.page.CheckoutPage"
+             Title="Checkout">
+    
+    <!--ici nous faison la sectmentation-->
+    <VerticalStackLayout VerticalOptions="Center" HorizontalOptions="Center">
+        <!--nous avons une image -->
+        <Image x:Name="img" Source="check" HeightRequest="150" WidthRequest="150"  >
+            <Image.Behaviors>
+                <!--nous avons la coleur de l'image -->
+                <toolkit:IconTintColorBehavior TintColor="Green"/>
+            </Image.Behaviors>
+        </Image>
+        <!--nous avons un text -->
+        <Label x:Name="msg"  Text="Order Placed Sucessfully" FontSize="25" TextColor="Green" />
+        <!--nous avons un button qui nous renvoie q une page precedante-->
+        <Button x:Name="homebtn"   Text="Go to home screen" BackgroundColor="DarkGoldenrod" Clicked="homebtn_Clicked" CornerRadius="22" VerticalOptions="Center" Padding="40, 10"  />
+    </VerticalStackLayout>
+</ContentPage>

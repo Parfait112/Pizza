@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+             xmlns:model="clr-namespace:PizzaMAUI.model"
+             xmlns:vm="clr-namespace:PizzaMAUI.ViewModel"
+             x:Class="PizzaMAUI.page.CartPage"
+             Title="Cart"
+             x:DataType="vm:CartViewModel"
+             BackgroundColor="PaleGoldenrod">
+
+
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Text="Clear Cart" Command="{Binding ClearCartCommand }"/>
+    </ContentPage.ToolbarItems>
+    
+    <Grid>
+        <ScrollView>
+            <VerticalStackLayout Padding="10" >
+                <!--nous faisont une collection de element de la base de donnee-->
+                <CollectionView ItemsSource="{Binding Items}">
+                    <!--ici est une situation quand la il y'a pas de donnee-->
+                    <CollectionView.EmptyView>
+                        <!--nous divisons des elements-->
+                        <VerticalStackLayout HorizontalOptions="Center" VerticalOptions="Center">
+                            <!--ici nous avons un code pour boit qui va nous permetre de separer la barre de recherche et le text -->
+                            <BoxView HeightRequest="100" Color="Transparent"/>
+                            <!--ici nous avons un text-->
+                            <Label Text="No items in the cart" TextColor="Grey" FontSize="25" HorizontalTextAlignment="Center" >
+                                
+                            </Label>
+                            <Button Text="Explore all pizzas" HorizontalOptions="Center" BackgroundColor="Goldenrod" Clicked="Button_Clicked" />
+                        </VerticalStackLayout>
+                    </CollectionView.EmptyView>
+                    <!--nous faisont donc les element sera dispose-->
+                    <CollectionView.ItemsLayout>
+                        <LinearItemsLayout Orientation="Vertical" ItemSpacing="10"/>
+                    </CollectionView.ItemsLayout>
+                    <!--nous declaront les element a disposer-->
+                    <CollectionView.ItemTemplate>
+                        <!--nous appelons la base de donnee-->
+                        <DataTemplate x:DataType="model:Pizza">
+                            <!--nous faisont les les rectangle-->
+                            <Border StrokeShape="RoundRectangle 15" StrokeThickness="0" BackgroundColor="White" Padding="10">
+                                <!--nous faisont la division entre plusieur column-->
+                                <Grid ColumnDefinitions="25, Auto, 50, *, 80, 25">
+                                    <!--nous faisont appeler a quantete qui se trouve dans la base de donnee-->
+                                    <Label Grid.Column="0" Text="{Binding CartQuntity}" FontSize="18" FontAttributes="Bold" VerticalOptions="Center" HorizontalOptions="Center"/>
+                                    <!--nous faisont un text-->
+                                    <Label Grid.Column="1" Text="x" FontSize="18" FontAttributes="Bold" VerticalOptions="Center" HorizontalOptions="Center"/>
+                                    <!--nous faisont appeler une image qui se trouve dans la base de donnee-->
+                                    <Image Grid.Column="2" Source="{Binding Image}" HorizontalOptions="Center" VerticalOptions="Center" HeightRequest="25" WidthRequest="25" />
+                                    <!--nous faisont une division -->
+                                    <VerticalStackLayout VerticalOptions="Center" Grid.Column="3">
+                                        <!--nous faisont appeler le nom qui se trouve dans la base de donnee-->
+                                        <Label Text="{Binding Name}"/>
+                                        <!--nous faisont appeler au prix qui se trouve dans la base de donnee-->
+                                        <Label Text="{Binding Price, StringFormat='${0:N2}'}" FontSize="12" />
+                                    </VerticalStackLayout>
+                                    <!--nous faisont appeler a montant qui se trouve dans la base de donnee-->
+                                    <Label Grid.Column="4" Text="{Binding Amount, StringFormat='${0:N2}'}" FontSize="15" FontAttributes="Bold" VerticalOptions="Center" HorizontalOptions="Center"/>
+                                    <!--nous appelons une image -->
+                                    <Image Grid.Column="5" Source="trash" HeightRequest="25" WidthRequest="25" VerticalOptions="Center" HorizontalOptions="End">
+                                        <Image.Behaviors>
+                                            <!--nous donnons une coleur a l'image-->
+                                            <toolkit:IconTintColorBehavior TintColor="red"/>
+                                        </Image.Behaviors>
+                                        <Image.GestureRecognizers>
+                                            <TapGestureRecognizer Command="{Binding Source={x:RelativeSource AncestorType={x:Type vm:CartViewModel}}, Path=RemoveCartItemCommand}" CommandParameter="{Binding Name}"/>
+                                        </Image.GestureRecognizers>
+                                    </Image>
+                                </Grid>
+                            </Border>
+                        </DataTemplate>
+                        
+                    </CollectionView.ItemTemplate>
+                </CollectionView>
+            </VerticalStackLayout>        
+        </ScrollView>
+        <!--nous avons les bordue en desous-->
+        <Border StrokeShape="RoundRectangle 40" StrokeThickness="0" BackgroundColor="DarkGoldenrod" VerticalOptions="End" Margin="5" Padding="10" >
+            <!--nous divisons notre contenue en plusieur columne-->
+            <Grid ColumnDefinitions="*,*">
+                <!--nous declaront un text-->
+                <Label Grid.Column="0" Padding="18, 0" TextColor="White" VerticalOptions="Center">
+                    <Label.FormattedText>
+                        <!--nous declaront la manier donc le text va apparatre-->
+                        <FormattedString>
+                            <!--nous declaront les valeur du text-->
+                            <Span  Text="Total: &#10;" FontSize="18"/>
+                            <Span Text="{Binding TotalAmount, StringFormat='${0:N2}'}" FontSize="20" FontAttributes="Bold"/>
+                        </FormattedString>
+                    </Label.FormattedText>
+                </Label>
+                <!--nous avons un button juste a coute du text-->
+                <Button Grid.Column="1" Text="Place Order" BackgroundColor="Goldenrod" CornerRadius="22" TextColor="White" VerticalOptions="End" Padding="25,10" Command="{Binding PlaceOrderCommand}" />
+            </Grid>
+        </Border>
+
+    </Grid>
+</ContentPage>

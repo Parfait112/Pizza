@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+             xmlns:model="clr-namespace:PizzaMAUI.model"
+             xmlns:vm="clr-namespace:PizzaMAUI.ViewModel"
+             x:Class="PizzaMAUI.page.HomePage"
+             Title="HomePage"
+             Padding="15"
+             x:DataType="vm:HomeViewModel">
+    
+    
+    
+    <ScrollView>
+        <VerticalStackLayout Spacing="10">
+            <!--ici nous avons le code pour creer un rectangle avec les bordue round-->
+            <Border StrokeShape="RoundRectangle 25" StrokeThickness="0" BackgroundColor="Goldenrod" VerticalOptions="Start" Padding="11">
+                <!--ici nous sectmentont se qui se trouve dans le rectange en deux column et deuc range-->
+                <Grid ColumnDefinitions="*, 150" RowDefinitions="*, Auto">
+                    <!--ici nous avons la 1er column et 1er composer de 2 text -->
+                    <VerticalStackLayout Grid.Row="0" Grid.Column="0">
+                        <Label Text="Best Offer" FontAttributes="Bold" FontSize="25" VerticalOptions="Center"/>
+                        <Label Text="Grab amazing offer before"/>
+                    </VerticalStackLayout>
+                    <!--ici nous avons un button qui se trouve a la 2 range avec aucune utilite-->
+                    <Button Grid.Row="1" Grid.Column="0" Text="Get it now" BackgroundColor="PaleGoldenrod" TextColor="Black" FontAttributes="Bold" CornerRadius="22" HorizontalOptions="Center" Padding="50, 0"/>
+                    <!--ici nous avons la 2eme column qui contient juste une photo-->
+                    <Image Grid.RowSpan="2" Grid.Column="1" Source="pit1.jpg" HeightRequest="150" WidthRequest="150"/>
+                </Grid>
+            </Border>
+            <!--ici nous avons le code pour creer un rectangle avec les bordue round-->
+            <Border StrokeShape="RoundRectangle 20" StrokeThickness="2" Stroke="Goldenrod">
+                <!--ici nous avons text aui se trouve dans le bordue-->
+                <Label Text="Search here.." TextColor="Goldenrod" FontSize="15" Padding="10,14"/>
+                <!--ici nous avons avont l'effect qui conduit a ses bordue-->
+                <Border.GestureRecognizers>
+                    <TapGestureRecognizer Command="{Binding GoToAllPizzasPageCommand}" CommandParameter="{x:Boolean true}"/>
+                </Border.GestureRecognizers>
+            </Border>
+            <!--ici nous avons un code pour boit qui va nous permetre de separer les bordue et le text -->
+            <BoxView HeightRequest="15" Color="White"/>
+
+            <!--ici nous sectmentont se qui se trouve dans le rectange en deux column -->
+            <Grid ColumnDefinitions="*,*">
+                <Label Grid.Column="0" Text="Popular items" FontSize="20" FontAttributes="Bold"/>
+                <Label Grid.Column="1" Text="View all" HorizontalOptions="End" VerticalOptions="End" TextDecorations="Underline">
+                    <!--ici nous avons avont l'effect qui conduit a se text-->
+                    <Label.GestureRecognizers>
+                        <TapGestureRecognizer Command="{Binding GoToAllPizzasPageCommand}" CommandParameter="{x:Boolean false}"/>
+                    </Label.GestureRecognizers>
+                </Label>
+            </Grid>
+            <!--ici nous faisont une collection de tout les donnee dans la base de donne-->
+            <FlexLayout BindableLayout.ItemsSource="{Binding Pizzas}">
+                <BindableLayout.ItemTemplate>
+                    <!--ici nous appelons la base de donne-->
+                    <DataTemplate x:DataType="model:Pizza">
+                        <!--ici nous avons le code pour creer un rectangle avec les bordue round-->
+                        <Border StrokeShape="RoundRectangle 10" StrokeThickness="0" BackgroundColor="PaleGoldenrod" Padding="10" Margin="2" FlexLayout.Basis="50%">
+                            <!--ici nous sectmentont les elements qui se trouve dans le rectangle en utilisant des range et donner l'espace entre eux-->
+                            <Grid RowDefinitions="150, Auto,Auto,Auto" RowSpacing="5">
+                                <!--ici nous avons appeler l'image qui se trouve dans la base de donnee sur la 1er range-->
+                                <Image Grid.Row="0" Source="{Binding Image}" HeightRequest="150" WidthRequest="130"/>
+                                <!--ici nous avons appeler le nom qui se trouve dans la base de donnee sur la 1er range-->
+                                <Label Grid.Row="1" Text="{Binding Name}" HorizontalOptions="Center" FontSize="20"/>
+                                <!--ici nous avons divise la 2em range en 2 column-->
+                                <Grid Grid.Row="2" ColumnDefinitions="*,*">
+                                    <!--ici nous avons appeler le prix qui se trouve dans la base de donnee dans un format precis sur la 1er column-->
+                                    <Label Grid.Column="0" Text="{Binding Price, StringFormat='${0:N2}'}" FontAttributes="Bold" VerticalOptions="Center"/>
+                                    <!--ici nous avons diviser la 2em column pour qu'il contient deux composant-->
+                                    <HorizontalStackLayout Grid.Column="1" HorizontalOptions="End" Spacing="2">
+                                        <!--ici nous avons le 1er composant qui un text-->
+                                        <Label Text="4"/>
+                                        <!--ici nous avons le 2em composant qui une image-->
+                                        <Image Source="star" HeightRequest="15">
+                                            <!--ici nous avons definir la color de l'image-->
+                                            <Image.Behaviors>
+                                                <toolkit:IconTintColorBehavior TintColor="DarkGoldenrod"/>
+                                            </Image.Behaviors>
+                                        </Image>
+                                    </HorizontalStackLayout>
+                                </Grid>
+                                <!--ici nous avons un button qui se trouve dans la dernier range du rectangle-->
+                                <Button Grid.Row="3" Text="view mode" BackgroundColor="Gold" TextColor="Black" CornerRadius="22" FontAttributes="Bold" VerticalOptions="End" HorizontalOptions="Center" Padding="25,0" Command="{Binding Source={x:RelativeSource AncestorType={x:Type vm:HomeViewModel}}, Path=GoToDetailsPageCommand}" CommandParameter="{Binding .}"/>
+                            </Grid>
+                            <!--ici nous avons avont l'effect qui conduit a ses bordue-->
+                            <Border.GestureRecognizers>
+                                <TapGestureRecognizer Command="{Binding Source={x:RelativeSource AncestorType={x:Type vm:HomeViewModel}}, Path=GoToDetailsPageCommand}" CommandParameter="{Binding .}" />
+                            </Border.GestureRecognizers>
+                        </Border>
+                    </DataTemplate>
+                </BindableLayout.ItemTemplate>
+                
+            </FlexLayout>
+        </VerticalStackLayout>
+
+    </ScrollView>
+</ContentPage>
